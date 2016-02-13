@@ -1,5 +1,5 @@
 {
-    "name": "yawmoght/GetOldTweets-PHP",
+    "name": "yawmoght/getoldtweets-php",
     "description": "Port of Jefferson-Henrique/GedOldTweets-java to PHP",
     "license": "MIT",
     "type": "library",
