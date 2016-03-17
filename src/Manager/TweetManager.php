@@ -45,8 +45,8 @@ class TweetManager
                     $criteria->getQuerySearch(),
                     $refreshCursor);
 
-                $refreshCursor = $response['inner']['min_position'];
-                $htmlCrawler = new Crawler($response['inner']['items_html']);
+                $refreshCursor = $response['min_position'];
+                $htmlCrawler = new Crawler($response['items_html']);
                 $tweetsCrawler = $htmlCrawler->filter('div.js-stream-tweet');
 
                 if ($tweetsCrawler->count() == 0) {
@@ -59,7 +59,7 @@ class TweetManager
                     $text = str_replace('[^\\u0000-\\uFFFF]', '', $tweet->filter('p.js-tweet-text')->first()->text());
                     $retweets = intval(str_replace(',', '', $tweet->filter('span.ProfileTweet-action--retweet span.ProfileTweet-actionCount')->first()->attr('data-tweet-stat-count')));
                     $favorites = intval(str_replace(',', '', $tweet->filter('span.ProfileTweet-action--favorite span.ProfileTweet-actionCount')->first()->attr('data-tweet-stat-count')));
-                    $date = new \DateTime(intval($tweet->filter('small.time span.js-short-timestamp')->first()->attr('data-time-ms')));
+                    $date = new \DateTime('@'.intdiv(intval($tweet->filter('small.time span.js-short-timestamp')->first()->attr('data-time-ms')), 1000));
                     $id = $tweet->first()->attr('data-tweet-id');
                     $permalink = $tweet->first()->attr('data-permalink-path');
 
