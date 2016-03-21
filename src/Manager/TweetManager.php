@@ -128,6 +128,7 @@ class TweetManager
 
         $url = sprintf('https://twitter.com/i/search/timeline?f=realtime&q=%s&src=typd&max_position=%s', urlencode(utf8_encode($appendQuery)), $scrollCursor);
         $request = $this->client->createRequest('GET', $url);
+        $request->setHeader('User-Agent', 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2');
         $response = $this->client->send($request);
 
         return $response->json();
