@@ -50,7 +50,7 @@ class TweetManager
                 $tweetsCrawler = $htmlCrawler->filter('div.js-stream-tweet');
 
                 if ($tweetsCrawler->count() == 0) {
-                    continue;
+                    break;
                 }
 
                 $tweetsCrawler->each(function ($tweet) use (&$results) {
@@ -115,15 +115,15 @@ class TweetManager
         }
 
         if ($since != null) {
-            $appendQuery .= 'from:' . $since;
+            $appendQuery .= 'since:' . $since;
         }
 
         if ($until != null) {
-            $appendQuery .= 'from:' . $until;
+            $appendQuery .= 'until:' . $until;
         }
 
         if ($querySearch != null) {
-            $appendQuery .= 'from:' . $querySearch;
+            $appendQuery .= ' ' . $querySearch;
         }
 
         $url = sprintf('https://twitter.com/i/search/timeline?f=realtime&q=%s&src=typd&max_position=%s', urlencode(utf8_encode($appendQuery)), $scrollCursor);
