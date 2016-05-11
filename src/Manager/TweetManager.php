@@ -115,11 +115,11 @@ class TweetManager
         }
 
         if ($since != null) {
-            $appendQuery .= 'since:' . $since;
+            $appendQuery .= ' since:' . $since;
         }
 
         if ($until != null) {
-            $appendQuery .= 'until:' . $until;
+            $appendQuery .= ' until:' . $until;
         }
 
         if ($querySearch != null) {
